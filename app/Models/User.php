@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Folder::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }
