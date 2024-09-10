@@ -15,7 +15,7 @@ class FolderTaskController extends Controller
     public function index(Request $request, int $folder)
     {
         (new TaskService)->index($folder);
-        $tasks = auth()->user()->folders()->where('id', $folder)?->first()?->tasks;
+        $tasks = auth()->user()->folders()->where('id', $folder)?->first()?->tasks()->filter($request->all())->paginate();
         return new TaskCollection($tasks);
     }
 }

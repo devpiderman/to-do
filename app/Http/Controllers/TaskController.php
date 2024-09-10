@@ -7,6 +7,7 @@ use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Services\TaskService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
@@ -14,9 +15,9 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = auth()->user()->tasks()->paginate();
+        $tasks = auth()->user()->tasks()->filter($request->all())->paginate();
         return new TaskCollection($tasks);
     }
 
