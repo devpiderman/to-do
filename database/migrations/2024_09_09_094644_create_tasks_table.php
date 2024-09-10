@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('status', ['todo', 'doing', 'done', 'missed'])->default('todo');
-            $table->timestamp('deadline');
             $table->timestamps();
         });
     }
