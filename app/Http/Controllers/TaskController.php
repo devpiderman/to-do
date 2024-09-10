@@ -25,7 +25,7 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        (new TaskService)->findFolderOrAbort($request->input('folder_id'));
+        (new TaskService)->create($request->input('folder_id'));
         auth()->user()->tasks()->create($request->validated());
         return response()->json([
             'message' => 'Task Created Successfully',
@@ -46,7 +46,7 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        (new TaskService)->findFolderOrAbort($request->input('folder_id'));
+        (new TaskService)->update($request->input('folder_id'));
         Gate::authorize('update', $task);
         $task->update($request->validated());
         return response()->json([

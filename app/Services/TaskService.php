@@ -6,10 +6,21 @@ use Illuminate\Http\Response;
 
 class TaskService
 {
+
+    public function create($folderId)
+    {
+        return $this->findFolderOrAbort($folderId);
+    }
+
+    public function update($folderId)
+    {
+        return $this->findFolderOrAbort($folderId);
+    }
+
     /**
      * Find the folder or abort with a 403 response if the user does not own it.
      */
-    public function findFolderOrAbort($folderId)
+    protected function findFolderOrAbort($folderId)
     {
         $folder = auth()->user()->folders()->find($folderId);
 
