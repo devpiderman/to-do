@@ -3,12 +3,8 @@
 use App\Http\Controllers\FolderController;
 use App\Http\Controllers\FolderTaskController;
 use App\Http\Controllers\TaskController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::controller(FolderController::class)->prefix('/folders')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/', 'index')->name('folders.index');
@@ -28,4 +24,10 @@ Route::controller(TaskController::class)->prefix('/tasks')->middleware(['auth:sa
 
 Route::controller(FolderTaskController::class)->middleware(['auth:sanctum'])->group(function () {
     Route::get('/folders/{folder}/tasks', 'index')->name('folders.tasks.index');
+});
+
+Route::controller(UserController::class)->prefix('/users')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('/', 'show')->name('users.show');
+    Route::put('/', 'update')->name('users.update');
+    Route::delete('/', 'destroy')->name('users.destroy');
 });
