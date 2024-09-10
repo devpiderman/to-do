@@ -10,7 +10,7 @@ class Task extends Model
 {
     use HasApiTokens, HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'deadline', 'folder_id'];
+    protected $fillable = ['title', 'description', 'status', 'folder_id'];
 
     public function folder()
     {
