@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\FolderTaskController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,8 @@ Route::controller(TaskController::class)->prefix('/tasks')->middleware(['auth:sa
     Route::get('/{task}', 'show')->name('tasks.show');
     Route::put('/{task}', 'update')->name('tasks.update');
     Route::delete('/{task}', 'destroy')->name('tasks.destory');
+});
+
+Route::controller(FolderTaskController::class)->middleware(['auth:sanctum'])->group(function () {
+    Route::get('/folders/{folder}/tasks', 'index')->name('folders.tasks.index');
 });

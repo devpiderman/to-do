@@ -6,6 +6,10 @@ use Illuminate\Http\Response;
 
 class TaskService
 {
+    public function index($folderId)
+    {
+        return $this->findFolderOrAbort($folderId);
+    }
 
     public function create($folderId)
     {
