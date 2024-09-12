@@ -22,7 +22,7 @@ class FolderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'alpha']
+            'title' => ['required', 'string']
         ];
     }
 }
