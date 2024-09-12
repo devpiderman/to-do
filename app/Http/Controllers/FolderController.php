@@ -27,7 +27,7 @@ class FolderController extends Controller
         auth()->user()->folders()->create($request->validated());
         return response()->json([
             'message' => 'Folder Created Successfully',
-        ]);
+        ], 201);
     }
 
     /**
@@ -60,6 +60,6 @@ class FolderController extends Controller
         $folder->delete();
         return response()->json([
             'message' => 'Folder Deleted Successfully',
-        ]);
+        ], 204);
     }
 }
