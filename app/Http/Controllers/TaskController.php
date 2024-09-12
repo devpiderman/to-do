@@ -30,7 +30,7 @@ class TaskController extends Controller
         auth()->user()->tasks()->create($request->validated());
         return response()->json([
             'message' => 'Task Created Successfully',
-        ]);
+        ], 201);
     }
 
     /**
@@ -64,6 +64,6 @@ class TaskController extends Controller
         $task->delete();
         return response()->json([
             'message' => 'Task Deleted Successfully',
-        ]);
+        ], 204);
     }
 }
