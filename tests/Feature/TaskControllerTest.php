@@ -82,7 +82,7 @@ class TaskControllerTest extends TestCase
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
-        $task = Task::factory()->create(['user_id' => $user2->id]);
+        $task = Task::factory()->create(['user_id' => $user2]);
         $updatedData = [
             'title' => 'Updated Task',
             'status' => $task->status,
