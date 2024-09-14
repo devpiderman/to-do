@@ -64,3 +64,234 @@ This project is a simple **Task Management System** built entirely on a RESTful 
 ## API Documentation
 
 For API testing, use **Postman** or a similar tool. The available endpoints include registration, login, CRUD operations for folders and tasks, task status updates, and more.
+
+## Authentication
+These endpoints handle user authentication, registration, and session management.
+
+### 1. Register
+- **Method**: `POST`
+- **URL**: `/register`
+- **Description**: Register a new user.
+- **Request Body**:
+  ```json
+  {
+    "name": "string, required",
+    "email": "string, required, unique",
+    "password": "string, required, confirmed"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "token": "your-token"
+  }
+  ```
+- **Auth Required**: No
+
+### 2. Login
+- **Method**: `POST`
+- **URL**: `/login`
+- **Description**: Login a user and generate a token.
+- **Request Body**:
+  ```json
+  {
+    "email": "string, required",
+    "password": "string, required"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "token": "your-token"
+  }
+  ```
+- **Auth Required**: No
+
+### 3. Logout
+- **Method**: `POST`
+- **URL**: `/logout`
+- **Description**: Logout the authenticated user.
+- **Auth Required**: Yes (Bearer token)
+
+---
+
+## Folders
+These endpoints handle the management of folders.
+
+### 1. Get All Folders
+- **Method**: `GET`
+- **URL**: `/folders`
+- **Description**: Retrieve all folders of the authenticated user.
+- **Auth Required**: Yes (Bearer token)
+
+### 2. Create a Folder
+- **Method**: `POST`
+- **URL**: `/folders`
+- **Description**: Create a new folder.
+- **Request Body**:
+  ```json
+  {
+    "title": "string, required"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "message": "Folder Created Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
+
+### 3. Get a Specific Folder
+- **Method**: `GET`
+- **URL**: `/folders/{folder}`
+- **Description**: Retrieve a specific folder by ID.
+- **Auth Required**: Yes (Bearer token)
+
+### 4. Update a Folder
+- **Method**: `PUT`
+- **URL**: `/folders/{folder}`
+- **Description**: Update the folder’s details.
+- **Request Body**:
+  ```json
+  {
+    "title": "string, required"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "message": "Folder Updated Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
+
+### 5. Delete a Folder
+- **Method**: `DELETE`
+- **URL**: `/folders/{folder}`
+- **Description**: Delete a folder by ID.
+- **Response**:
+  ```json
+  {
+    "message": "Folder Deleted Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
+
+---
+
+## Tasks
+These endpoints handle task creation and management.
+
+### 1. Get All Tasks
+- **Method**: `GET`
+- **URL**: `/tasks`
+- **Description**: Retrieve all tasks of the authenticated user.
+- **Auth Required**: Yes (Bearer token)
+
+### 2. Create a Task
+- **Method**: `POST`
+- **URL**: `/tasks`
+- **Description**: Create a new task.
+- **Request Body**:
+  ```json
+  {
+    "title": "string, required",
+    "description": "string, optional",
+    "status": "enum:todo,doing,done,missed, required",
+    "folder_id": "integer, required"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "message": "Task Created Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
+
+### 3. Get a Specific Task
+- **Method**: `GET`
+- **URL**: `/tasks/{task}`
+- **Description**: Retrieve a specific task by ID.
+- **Auth Required**: Yes (Bearer token)
+
+### 4. Update a Task
+- **Method**: `PUT`
+- **URL**: `/tasks/{task}`
+- **Description**: Update the task details.
+- **Request Body**:
+  ```json
+  {
+    "title": "string, required",
+    "description": "string, optional",
+    "status": "enum:todo,doing,done,missed, required",
+    "folder_id": "integer, required"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "message": "Task Updated Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
+
+### 5. Delete a Task
+- **Method**: `DELETE`
+- **URL**: `/tasks/{task}`
+- **Description**: Delete a task by ID.
+- **Response**:
+  ```json
+  {
+    "message": "Task Deleted Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
+
+### 6. Get Tasks in a Folder
+- **Method**: `GET`
+- **URL**: `/folders/{folder}/tasks`
+- **Description**: Retrieve all tasks in a specific folder.
+- **Auth Required**: Yes (Bearer token)
+
+---
+
+## User Management
+These endpoints handle user profile management.
+
+### 1. Get User Info
+- **Method**: `GET`
+- **URL**: `/users`
+- **Description**: Retrieve the authenticated user’s information.
+- **Auth Required**: Yes (Bearer token)
+
+### 2. Update User Info
+- **Method**: `PUT`
+- **URL**: `/users`
+- **Description**: Update the authenticated user’s name.
+- **Request Body**:
+  ```json
+  {
+    "name": "string, required"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "message": "User Name Updated Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
+
+### 3. Delete User Account
+- **Method**: `DELETE`
+- **URL**: `/users`
+- **Description**: Delete the authenticated user’s account.
+- **Response**:
+  ```json
+  {
+    "message": "User Account Deleted Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
