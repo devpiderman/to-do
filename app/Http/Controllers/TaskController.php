@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LogEvent;
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
@@ -27,7 +28,8 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
         (new TaskService)->create($request->input('folder_id'));
-        auth()->user()->tasks()->create($request->validated());
+        $task = auth()->user()->tasks()->create($request->validated());
+        event(new LogEvent($task, __FUNCTION__));
         return response()->json([
             'message' => 'Task Created Successfully',
         ], 201);
@@ -50,6 +52,7 @@ class TaskController extends Controller
         (new TaskService)->update($request->input('folder_id'));
         Gate::authorize('update', $task);
         $task->update($request->validated());
+        event(new LogEvent($task, __FUNCTION__));
         return response()->json([
             'message' => 'Task Updated Successfully',
         ]);
@@ -62,6 +65,7 @@ class TaskController extends Controller
     {
         Gate::authorize('delete', $task);
         $task->delete();
+        event(new LogEvent($task, __FUNCTION__));
         return response()->json([
             'message' => 'Task Deleted Successfully',
         ], 204);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LogEvent;
 use App\Http\Requests\FolderRequest;
 use App\Http\Resources\FolderCollection;
 use App\Http\Resources\FolderResource;
@@ -24,7 +25,8 @@ class FolderController extends Controller
      */
     public function store(FolderRequest $request)
     {
-        auth()->user()->folders()->create($request->validated());
+        $folder = auth()->user()->folders()->create($request->validated());
+        event(new LogEvent($folder, __FUNCTION__));
         return response()->json([
             'message' => 'Folder Created Successfully',
         ], 201);
@@ -46,6 +48,7 @@ class FolderController extends Controller
     {
         Gate::authorize('update', $folder);
         $folder->update($request->validated());
+        event(new LogEvent($folder, __FUNCTION__));
         return response()->json([
             'message' => 'Folder Updated Successfully',
         ]);
@@ -58,6 +61,7 @@ class FolderController extends Controller
     {
         Gate::authorize('delete', $folder);
         $folder->delete();
+        event(new LogEvent($folder, __FUNCTION__));
         return response()->json([
             'message' => 'Folder Deleted Successfully',
         ], 204);
