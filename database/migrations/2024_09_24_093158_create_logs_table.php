@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->morphs('logable');
-            $table->enum('status', ['create', 'update', 'delete']);
+            $table->enum('action_type', ['store', 'update', 'destroy']);
             $table->timestamps();
         });
     }
