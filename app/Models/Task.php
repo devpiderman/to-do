@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\TaskFilter;
+use App\Models\Traits\Logable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Task extends Model
 {
-    use HasApiTokens, HasFactory;
+    use HasApiTokens, HasFactory, Logable;
 
     protected $fillable = ['title', 'description', 'status', 'folder_id'];
 

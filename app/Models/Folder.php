@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Logable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 
 class Folder extends Model
 {
-    use HasApiTokens, HasFactory;
+    use HasApiTokens, HasFactory, Logable;
 
     protected $fillable = ['title'];
 
