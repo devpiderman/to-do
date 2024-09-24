@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('folder_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->enum('status', ['todo', 'doing', 'done', 'missed'])->default('todo');
             $table->timestamps();
         });
