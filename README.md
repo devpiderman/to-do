@@ -295,3 +295,31 @@ These endpoints handle user profile management.
   }
   ```
 - **Auth Required**: Yes (Bearer token)
+
+## Logs Management
+
+These endpoints handle the management of logs for the authenticated user.
+
+### 1. Get All Logs
+- **Method**: `GET`
+- **URL**: `/logs`
+- **Description**: Retrieve all logs for the authenticated user.
+- **Auth Required**: Yes (Bearer token)
+
+### 2. Get a Specific Log
+- **Method**: `GET`
+- **URL**: `/logs/{log}`
+- **Description**: Retrieve a specific log by ID.
+- **Auth Required**: Yes (Bearer token)
+
+### 5. Delete a Task
+- **Method**: `DELETE`
+- **URL**: `/logs/{log}`
+- **Description**: Delete a log by ID.
+- **Response**:
+  ```json
+  {
+    "message": "Log Deleted Successfully"
+  }
+  ```
+- **Auth Required**: Yes (Bearer token)
